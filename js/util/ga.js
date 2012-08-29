@@ -1,6 +1,6 @@
-define(['ga'], function(ga) {
+define(['https://ssl.google-analytics.com/ga'], function(ga) {
 
-  if(window._gaq === undefined) return;
+  if(window._gaq === undefined) return null;
   if(window._gaInit === undefined) {
     window._gaInit = true;
     console.log('init google analytics')
