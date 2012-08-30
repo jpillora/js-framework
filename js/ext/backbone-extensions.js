@@ -1,4 +1,4 @@
-define(['backbone'], function() {
+define(['backbone'], function(Backbone) {
 
   //throw away logs on older browsers
   if(window.console === undefined)
@@ -39,5 +39,6 @@ define(['backbone'], function() {
       view.$("input[type=checkbox][data-name]").click(saveValue);
     }
   });
-  
+
+  return Backbone;
 });

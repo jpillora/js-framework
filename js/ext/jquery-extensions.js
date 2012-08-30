@@ -1,4 +1,4 @@
-define(['jquery'], function() {
+define(['jquery'], function($) {
 
   //extra jquery methods
   $.fn.flash = function(color) {
@@ -45,5 +45,7 @@ define(['jquery'], function() {
     if(this && this.length > 0)
       $.scrollTo(0 ? this.is(':hidden') : e.offset().top-100);
   }
+
+  return $;
 
 });

@@ -1,4 +1,4 @@
-define(['https://ssl.google-analytics.com/ga'], function(ga) {
+define(['https://ssl.google-analytics.com/ga.js'], function() {
 
   if(window._gaq === undefined) return null;
   if(window._gaInit === undefined) {
