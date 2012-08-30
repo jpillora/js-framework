@@ -12,7 +12,10 @@
       'backbone'      : '../framework/js/lib/backbone',
       'bootstrap'     : '../framework/js/lib/bootstrap',
       'text'          : '../framework/js/lib/require.text',
+      'css'           : '../framework/js/lib/require.css',
+      'css.api'       : '../framework/js/lib/require.css.api',
       'json2'         : '../framework/js/lib/json2',
+      'prettify'      : '../framework/js/lib/prettify/prettify',
       //Extensions
       'jquery-ext'    : '../framework/js/ext/jquery-extensions',
       'backbone-ext'  : '../framework/js/ext/backbone-extensions',
@@ -27,7 +30,8 @@
       },
       'bootstrap': ['jquery'],
       'jquery.cookie': ['jquery'],
-      'jquery.color': ['jquery']
+      'jquery.color': ['jquery'],
+      'prettify': ['css!../framework/js/lib/prettify/prettify']
     }
   });
 

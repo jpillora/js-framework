@@ -13,6 +13,7 @@ define(['jquery.cookie','json2'], function() {
   var methods = {
     get: function(key) {
       var o = $.cookie(key);
+      if(!o) return null;
       if(typeOf(o) !== 'object') throw "Getting key from a non-object";
       if(o && o[IS_SET] === true) {
         var vals = [];
@@ -33,13 +34,14 @@ define(['jquery.cookie','json2'], function() {
     },
     push : function(key,val) {
       var a = $.cookie(key) || [];
-      if(typeOf(o) !== 'array') throw "Pushing to a non-array";
+      if(typeOf(a) !== 'array') throw "Pushing to a non-array";
       a.push(val);
       $.cookie(key, a);
       return a;
     },
     pop: function(key) {
       var a = $.cookie(key);
+      if(!a) return null;
       if(typeOf(a) !== 'array') throw "Popping a non-array";
       if(a.pop === undefined) return;
       var val = a.pop();
