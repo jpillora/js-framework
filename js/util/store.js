@@ -3,8 +3,6 @@ define(['jquery.cookie','json2'], function() {
   if($.cookie === undefined) throw "Missing jquery.cookie.js";
   if(JSON === undefined) throw "Missing json2.js";
 
-  $.cookie.config.json = true;
-
   var typeOf = function(o) {
     if(!o) return;
     var m = Object.prototype.toString.call(o).match(/^\[object (\w+)\]$/);
