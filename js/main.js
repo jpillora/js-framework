@@ -1,1 +1,3 @@
-alert(42);
+define(["require"],function(require){
+  return 0;
+});
