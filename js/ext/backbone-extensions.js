@@ -37,6 +37,11 @@ define(['backbone'], function(Backbone) {
       }
       view.$("input[type=text][data-name]").on('save',saveValue);
       view.$("input[type=checkbox][data-name]").click(saveValue);
+    },
+
+    executeTemplate: function() {
+      if(!this.model) return log("cannot exec. template. no model.");
+      this.$el.html(this.template(this.model.toJSON()));
     }
   });
 
