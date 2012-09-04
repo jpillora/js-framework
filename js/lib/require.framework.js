@@ -1,6 +1,5 @@
-
 define({
-  load: function (name, req, load, config) {
+  load: function (name, require, onLoad, config) {
 
     if(config.framework.baseUrl === undefined)
       throw "Please define: config.framework.baseUrl";
@@ -8,10 +7,10 @@ define({
     var newName = config.framework.baseUrl + name + ".js";
 
     console.log("load framework name: " + newName);
-    //req has the same API as require().
-    req([newName], function (value) {
+
+    require([newName], function (value) {
       console.log("load framework value: " + name);
-      load(value);
+      onLoad(value);
     });
   }
 });
