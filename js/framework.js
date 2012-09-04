@@ -6,6 +6,11 @@
       '../../framework/' : 'http://framework.jpillora.com/';
 
   require.config({
+
+    framework: {
+      baseUrl: 'http://framework.jpillora.com/js/'
+    },
+
     baseUrl: 'js/',
     paths: {
       //Library classes
@@ -15,6 +20,7 @@
       'underscore'        : framework + 'js/lib/lodash',
       'backbone'          : framework + 'js/lib/backbone',
       'bootstrap'         : framework + 'js/lib/bootstrap',
+      'fw'                : framework + 'js/lib/require.framework',
       'text'              : framework + 'js/lib/require.text',
       'css'               : framework + 'js/lib/require.css',
       'css.api'           : framework + 'js/lib/require.css.api',
@@ -25,7 +31,7 @@
       'backbone-ext'      : framework + 'js/ext/backbone-extensions',
       //Utility classes
       'ga'                : framework + 'js/util/ga',
-      'log'               : framework + 'js/util/log',
+      'log'               : framework + 'js/util/logger',
       'store'             : framework + 'js/util/store'
     },
     shim: {
@@ -36,11 +42,13 @@
       'bootstrap': ['jquery'],
       'jquery.cookie': ['jquery'],
       'jquery.color': ['jquery'],
-      'prettify': ['css!' + framework + 'js/lib/prettify/prettify']
+       //'prettify': ['css!' + framework + 'js/lib/prettify/prettify']
     }
   });
 
   //Setup library customisations and Initialise the App
-  require(['main']);
+  require(['main','fw!lib/jquery'], function() {
+
+  });
 
 })();
