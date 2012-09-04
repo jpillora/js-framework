@@ -18,7 +18,8 @@
       'json2'             : framework + 'js/lib/json2',
       'prettify'          : framework + 'js/lib/prettify/prettify',
       'paper'             : framework + 'js/lib/paper',
-      'paper'             : framework + 'js/lib/ace/ace',
+      'raphael'           : framework + 'js/lib/raphael-min',
+      'ace'               : framework + 'js/lib/ace/ace',
       //Require Plugins
       'text'              : framework + 'js/lib/require.text',
       'css'               : framework + 'js/lib/require.css',
