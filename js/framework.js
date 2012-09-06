@@ -1,39 +1,79 @@
 //Setup require framework paths
 (function(){
 
-  var framework = 
-    window.location.protocol === 'file:' || window.location.host === '127.0.0.1:8888' ?  
-      '../../framework/' : 'http://framework.jpillora.com/';
+
+  //inline framework helper function - allows a second base URL
+  define('fw',{
+    load: function (name, req, load, config) {
+
+      if(config.framework.baseUrl === undefined)
+        throw "Please define: config.framework.baseUrl";
+
+      var newName = config.framework.baseUrl + name;
+
+      if(!newName.match(/\.\w+$/))
+        newName += ".js";
+
+      //console.log("load framework name: " + newName);
+      //req has the same API as require().
+      req([newName], function (value) {
+        //console.log("load framework value: " + name);
+        load(value);
+      });
+    }
+  });
+
+  define('fwcss',{
+    load: function (name, req, load, config) {
+
+      if(config.framework.baseUrl === undefined)
+        throw "Please define: config.framework.baseUrl";
+
+      var newName = config.framework.baseUrl + name;
+
+      if(!newName.match(/\.\w+$/))
+        newName += ".js";
+
+      //console.log("load framework name: " + newName);
+      //req has the same API as require().
+      req([newName], function (value) {
+        //console.log("load framework value: " + name);
+        load(value);
+      });
+    }
+  });
+
+  //auto set framework path based on script tag
+  var framework = '', scripts = document.getElementsByTagName("script");
+  for(var i = 0; i < scripts.length; ++i){
+    var script = scripts[i], main = script.getAttribute('data-main'),
+        m = script.src.match(/^(\w+):\/\/([^\/]+)\//);
+    if(m &&main && main.match(/framework$/)) {
+      var protocol = m[1], host = m[2];
+      framework = protocol === 'file' || host === '127.0.0.1:8888' ?  '../../framework/' : 
+                                         host === 'localhost:8888' ?  'http://localframework:8888/JavaScript/framework/' :
+                                            'http://framework.jpillora.com/';
+      break;
+    }
+  }
 
   require.config({
 
     framework: {
-      baseUrl: 'http://framework.jpillora.com/js/'
+      baseUrl: framework + 'js/'
     },
 
     baseUrl: 'js/',
-    paths: {
-      //Library classes
-      'jquery'            : framework + 'js/lib/jquery',
-      'jquery.cookie'     : framework + 'js/lib/jquery.cookie',
-      'jquery.color'      : framework + 'js/lib/jquery.color',
-      'underscore'        : framework + 'js/lib/lodash',
-      'backbone'          : framework + 'js/lib/backbone',
-      'bootstrap'         : framework + 'js/lib/bootstrap',
-      'fw'                : framework + 'js/lib/require.framework',
-      'text'              : framework + 'js/lib/require.text',
-      'css'               : framework + 'js/lib/require.css',
-      'css.api'           : framework + 'js/lib/require.css.api',
-      'json2'             : framework + 'js/lib/json2',
-      'prettify'          : framework + 'js/lib/prettify/prettify',
-      //Custom Extensions
-      'jquery-ext'        : framework + 'js/ext/jquery-extensions',
-      'backbone-ext'      : framework + 'js/ext/backbone-extensions',
-      //Utility classes
-      'ga'                : framework + 'js/util/ga',
-      'log'               : framework + 'js/util/logger',
-      'store'             : framework + 'js/util/store'
+    map: {
+      //shortcuts. not using paths to maintain relative addresses
+      '*': {
+        'jquery'            : 'fw!lib/jquery',
+        'backbone'          : 'fw!lib/backbone',
+        'underscore'        : 'fw!lib/lodash.min',
+        'prettify'          : 'fw!lib/prettify/prettify'
+      }
     },
+
     shim: {
       'backbone': {
         deps: ['underscore', 'jquery'],
@@ -47,7 +87,7 @@
   });
 
   //Setup library customisations and Initialise the App
-  require(['main','fw!lib/jquery'], function() {
+  require(['main','fw!css!lib/jquery'], function() {
 
   });
 
