@@ -441,7 +441,7 @@ var requirejs, require, define;
                 normalizedName = '';
 
 
-            console.log("make map: " + name)
+            //console.log("make map: " + name)
 
             //If no name, then it means it is a require call, generate an
             //internal name.
@@ -1013,7 +1013,6 @@ var requirejs, require, define;
 
                         if (this.map.isDefine && !this.ignore) {
                             defined[id] = exports;
-
                             if (req.onResourceLoad) {
                                 req.onResourceLoad(context, this.map, this.depMaps);
                             }
