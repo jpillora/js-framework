@@ -1,45 +1,6 @@
 //Setup require framework paths
 (function(){
 
-  //framework plugins - assist in loading js/css
-  //inline framework helper function to load 
-  define('fw',{
-    load: function (name, req, onLoad, config) {
-
-      if(config.framework.baseUrl === undefined)
-        throw "Please define: config.framework.baseUrl";
-
-      //no extension, assume js
-      if(!name.match(/\.\w+$/)) name += ".js";
-
-      var extension = name.match(/\.(\w+)$/)[1];
-
-      if(extension == 'js') {
-
-        var url = config.framework.baseUrl + "js/" + name;
-        req([url], function (value) {
-          onLoad(value);
-        });
-
-      } else if (extension == 'css') {
-
-        var url = config.framework.baseUrl + "css/" + name;
-        var link = document.createElement('link');
-        link.type = 'text/css';
-        link.rel = 'stylesheet';
-        link.href = url;
-
-        document.getElementsByTagName('head')[0].appendChild(link);
-
-        onLoad(url);
-
-      } else {
-        console.log("unknown extension: " + extension);
-      }
-
-    }
-  });
-
   //auto set framework path based on framework script tag
   var framework = '', scripts = document.getElementsByTagName("script");
   for(var i = 0; i < scripts.length; ++i){
@@ -54,20 +15,27 @@
 
   require.config({
 
-    framework: {
-      baseUrl: framework
+    baseUrl: 'js/',
+    
+    //framework paths
+    paths: {
+      'framework': framework,
+      'lib'      : framework + 'js/lib/',
+      'ext'      : framework + 'js/ext/',
+      'util'     : framework + 'js/util/'
     },
 
-    baseUrl: 'js/',
+    //shortcuts
     map: {
-      //shortcuts. not using paths to maintain use relative paths
       '*': {
-        'jquery'            : 'fw!lib/jquery',
-        'backbone'          : 'fw!lib/backbone',
-        'underscore'        : 'fw!lib/lodash.min'
+        'jquery'        : 'lib/jquery',
+        'backbone'      : 'lib/backbone',
+        'underscore'    : 'lib/lodash.min',
+        'css'           : 'lib/require.css'
       }
     },
 
+    //non-modularised libraries with deps
     shim: {
       'backbone': {
         deps: ['underscore', 'jquery'],
@@ -76,7 +44,7 @@
       'bootstrap': ['jquery'],
       'jquery.cookie': ['jquery'],
       'jquery.color': ['jquery'],
-      'fw!lib/prettify/prettify': ['fw!prettify.css']
+      'lib/prettify/prettify': ['css!framework/css/prettify']
     }
   });
 
