@@ -30,20 +30,23 @@
       '*': {
         'jquery'        : 'lib/jquery',
         'backbone'      : 'lib/backbone',
+        'bootstrap'     : 'lib/bootstrap',
         'underscore'    : 'lib/lodash.min',
-        'css'           : 'lib/require.css'
+        'css'           : 'lib/require.css',
+        'text'          : 'lib/require.text'
       }
     },
 
     //non-modularised libraries with deps
     shim: {
-      'backbone': {
+      'lib/backbone': {
         deps: ['underscore', 'jquery'],
         exports: 'Backbone'
       },
-      'bootstrap': ['jquery'],
-      'jquery.cookie': ['jquery'],
-      'jquery.color': ['jquery'],
+      'lib/bootstrap': ['jquery'],
+      //jquery plugins
+      'lib/jquery.cookie': ['jquery'],
+      'lib/jquery.color': ['jquery'],
       'lib/prettify': ['css!framework/css/prettify']
     }
   });

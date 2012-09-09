@@ -1,4 +1,4 @@
-define(['jquery.cookie','json2'], function() {
+define(['lib/jquery.cookie','lib/json2'], function() {
 
   if($.cookie === undefined) throw "Missing jquery.cookie.js";
   if(JSON === undefined) throw "Missing json2.js";

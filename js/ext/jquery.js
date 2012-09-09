@@ -1,4 +1,4 @@
-define(['jquery'], function($) {
+define(['jquery'], function() {
 
   //extra jquery methods
   $.fn.flash = function(color) {

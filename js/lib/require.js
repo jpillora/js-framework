@@ -191,7 +191,7 @@ var requirejs, require, define;
      * @returns {Error}
      */
     function makeError(id, msg, err, requireModules) {
-        var e = new Error(msg + '\nhttp://requirejs.org/docs/errors.html#' + id + '\nOn file: ' + err.target.src);
+        var e = new Error(msg + '\nhttp://requirejs.org/docs/errors.html#' + id + (err && err.src ? '\nOn file: ' + err.target.src : ''));
         e.requireType = id;
         e.requireModules = requireModules;
         if (err) {
