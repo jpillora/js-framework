@@ -20,9 +20,9 @@
     //framework paths
     paths: {
       'framework': framework,
-      'lib'      : framework + 'js/lib/',
-      'ext'      : framework + 'js/ext/',
-      'util'     : framework + 'js/util/'
+      'lib'      : framework + 'js/lib',
+      'ext'      : framework + 'js/ext',
+      'util'     : framework + 'js/util'
     },
 
     //shortcuts
@@ -44,7 +44,7 @@
       'bootstrap': ['jquery'],
       'jquery.cookie': ['jquery'],
       'jquery.color': ['jquery'],
-      'lib/prettify/prettify': ['css!framework/css/prettify']
+      'lib/prettify': ['css!framework/css/prettify']
     }
   });
 
