@@ -191,7 +191,7 @@ var requirejs, require, define;
      * @returns {Error}
      */
     function makeError(id, msg, err, requireModules) {
-        var e = new Error(msg + '\nhttp://requirejs.org/docs/errors.html#' + id);
+        var e = new Error(msg + '\nhttp://requirejs.org/docs/errors.html#' + id + (err && err.src ? '\nOn file: ' + err.target.src : ''));
         e.requireType = id;
         e.requireModules = requireModules;
         if (err) {
@@ -411,6 +411,11 @@ var requirejs, require, define;
             }
         }
 
+
+        function extractPlugin(name, map) {
+
+        }
+
         /**
          * Creates a module mapping that includes plugin prefix, module
          * name, and path. If parentModuleMap is provided it will
@@ -434,6 +439,9 @@ var requirejs, require, define;
                 originalName = name,
                 isDefine = true,
                 normalizedName = '';
+
+
+            //console.log("make map: " + name)
 
             //If no name, then it means it is a require call, generate an
             //internal name.
@@ -466,6 +474,9 @@ var requirejs, require, define;
                 } else {
                     //A regular module.
                     normalizedName = normalize(name, parentName, applyMap);
+                    //Normalisation added a plugin. Recurse.
+                    if(normalizedName.match(/^\w+!/))
+                        return makeModuleMap(normalizedName, parentModuleMap, isNormalized, applyMap);
                     url = context.nameToUrl(normalizedName);
                 }
             }
@@ -921,7 +932,6 @@ var requirejs, require, define;
 
             load: function () {
                 var url = this.map.url;
-
                 //Regular dependency.
                 if (!urlFetched[url]) {
                     urlFetched[url] = true;
@@ -1003,7 +1013,6 @@ var requirejs, require, define;
 
                         if (this.map.isDefine && !this.ignore) {
                             defined[id] = exports;
-
                             if (req.onResourceLoad) {
                                 req.onResourceLoad(context, this.map, this.depMaps);
                             }
