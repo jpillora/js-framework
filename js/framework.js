@@ -3,12 +3,12 @@
 
   //auto set framework path based on framework script tag
   var framework = '', scripts = document.getElementsByTagName("script");
-  for(var i = 0; i < scripts.length; ++i){
+  for(var i = 0; i < scripts.length; ++i) {
     var script = scripts[i], main = script.getAttribute('data-main'),
         m = script.src.match(/^(\w+):\/\/([^\/]+)\//);
     if(m &&main && main.match(/framework$/)) {
       var protocol = m[1], host = m[2];
-      framework = host === 'localframework:8888' ?  'http://localframework:8888/framework/' : 'http://'+host+'/';
+      framework = 'http://'+host+'/' + (host === 'localframework:8888' ?  'framework/' : '');
       break;
     }
   }
