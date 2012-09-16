@@ -1,7 +1,7 @@
 ({
   //change these two...
   baseUrl: "../../qa-widget/js/",
-  out: '../../qa-widget/js/qa-widget.js',
+  out:     "../../qa-widget/js/qa-widget.js",
 
   //entry
   name: '../../framework/js/framework',
