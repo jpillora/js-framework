@@ -1,6 +1,11 @@
 define({
   load: function (name, require, onLoad, config) {
 
+    if (config.isBuild) {
+      onLoad(null);
+      return;
+    }
+
     var extension = name.match(/\.(\w+)$/);
 
     if(extension && extension[1] !== 'css')
