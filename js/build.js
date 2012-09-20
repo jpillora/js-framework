@@ -34,6 +34,7 @@
     },
     'lib/bootstrap': ['jquery'],
     //jquery plugins
+    'lib/jquery.autogrow': ['jquery'],
     'lib/jquery.cookie': ['jquery'],
     'lib/jquery.color': ['jquery'],
     'lib/prettify': ['css!framework/css/prettify']

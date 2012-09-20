@@ -41,9 +41,9 @@ define(['jquery'], function() {
     }, 100);
   }
 
-  $.fn.scrollTo = function(e) {
+  $.fn.scrollTo = function() {
     if(this && this.length > 0)
-      $.scrollTo(0 ? this.is(':hidden') : e.offset().top-100);
+      $.scrollTo(this.is(':hidden') ? 0 : this.offset().top-100);
   }
 
   return $;

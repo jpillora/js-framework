@@ -7,8 +7,8 @@ define(['backbone'], function(Backbone) {
   var logFn = function(str, groupBoolean) {
 
     if(str)
-    str = (this.name||this.cid) + ": " + 
-          (this.model&&this.model.id?(this.model.id+": "):"") + 
+    str = this.name + ": " + 
+          (this.model&&this.model.id?this.model.id:this.cid) + ": " +
           str;
 
     if(groupBoolean === true)
@@ -49,6 +49,7 @@ define(['backbone'], function(Backbone) {
       view.$("input[type=checkbox][data-name]").click(saveValue);
     },
 
+
     setupNestedViews: function(callback) {
 
       var thisView = this,
@@ -56,10 +57,9 @@ define(['backbone'], function(Backbone) {
           totalRequires = containers.length, 
           currRequire = 0;
 
-
       if(totalRequires == 0) return;
 
-      thisView.log('start setup views', true);
+      //thisView.log('start setup views', true);
 
       containers.each(function(){
         var container = $(this);
@@ -80,7 +80,7 @@ define(['backbone'], function(Backbone) {
 
           currRequire++;
           if(currRequire == totalRequires){
-            thisView.log('setup complete', false);
+            //thisView.log('setup complete', false);
             if(callback !== undefined)
               callback.apply(thisView);
           }
