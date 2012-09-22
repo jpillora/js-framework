@@ -27,6 +27,12 @@ define(['jquery'], function() {
     return true;
   }
 
+  $.fn.visible = function(bool){
+    var hidden = $(this).parents(":hidden").length > 0;
+    return $(this)[hidden && bool ? 'show'      : hidden  && !bool ? 'hide' :
+                  !hidden && bool ? 'slideDown' : !hidden && !bool ? 'slideUp' : 'noop'](); 
+  };
+
   $.titlise = function(str) {
     var splitChar = str.indexOf(' ') > 0 ? ' ' : '_';
     var parts = str.split(splitChar);
