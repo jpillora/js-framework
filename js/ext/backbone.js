@@ -1,15 +1,19 @@
-define(['backbone'], function(Backbone) {
+define(['backbone','util/is'], function(Backbone,is) {
 
   //throw away logs on older browsers
   if(window.console === undefined)
       window.console = { log: $.noop, group: $.noop };
   
+
+  var getName = function(obj) {
+    return obj.name + ": " + (obj.model && obj.model.id ? (obj.model.id + ": ") : 
+                                           obj.cid ? (obj.cid + ": ") : '');
+  }
+
   var logFn = function(str, groupBoolean) {
 
     if(str)
-    str = this.name + ": " + 
-          (this.model&&this.model.id?this.model.id:this.cid) + ": " +
-          str;
+      str = getName(this) + str;
 
     if(groupBoolean === true)
       console.group(str);
@@ -29,6 +33,7 @@ define(['backbone'], function(Backbone) {
   _.extend(Backbone.Collection.prototype, {
     log: logFn
   });
+
   //extra view methods
   _.extend(Backbone.View.prototype, {
 
@@ -120,17 +125,81 @@ define(['backbone'], function(Backbone) {
     executeTemplate: function() {
       if(!this.template) return this.log("cannot exec. template. no template set.");
       var data = this.model === undefined ? {} : this.model.toJSON();
+      this.log("data: " + JSON.stringify(data));
       this.$el.html(this.template(data));
     },
 
-    parentGet: function(attribute) {
-      if(this.attributes && this.attributes.parent) {
-        var model = this.attributes.parent.model;
-        if (model) return model.get(attribute);
-      }
-      return null;
-    }
+    parentModel: function(attribute) {
+      if(!this.attributes || !this.attributes.parent)
+        return null;
+      return this.attributes.parent.model;
+    },
 
+    parentGet: function(attribute) {
+      var model = this.parentModel(attribute);
+      if (!model)
+        return null;
+      return model.get(attribute);
+    },
+
+    setupCollection: function(attribute, Collection) {
+
+      var view = this;
+      var model = this.parentModel(attribute);
+
+      if(!model)
+        throw "no parent model";
+
+      if(!this.model)
+        this.model = model;
+
+      var collection = new Collection();
+
+      model.set(attribute+'_collection', collection);
+
+      //bind collection events
+      if(is.fn(this.addAll))
+        collection.on('reset', this.addAll, this);
+
+      if(is.fn(this.addOne))
+        collection.on('add', this.addOne, this);
+
+      //bind parent model events
+      var event = 'change:'+attribute;
+      view.log('bind event: ' + event);
+
+      model.on('change:'+attribute, function(model, obj) {
+
+        view.log('change: ' + attribute + " to: " + JSON.stringify(newItems) + " !!");
+
+        var newItems;
+        if(is.array(obj)) {
+          newItems = obj;
+        } else if(is.object(obj) && obj.items) {
+          newItems = obj.items;
+        } else {
+          return view.log("cannot find items");
+        }
+
+        if(!is.array(newItems)) return view.log("items not an array");
+        if(newItems.length === 0) return view.log("items are empty");
+          //throw 'cannot add non-array: ' + attribute;
+        collection.add(newItems, {merge:true});
+      });
+
+
+      var items = model.get(attribute);
+
+      //add when ready
+      if(items && items.length)
+      view.on('rendered', function() {
+        view.log("model set: " + attribute + ": #" + items.length);
+        model.set(attribute, {items:items})
+      });
+
+      return collection;
+
+    }
 
   });
 
