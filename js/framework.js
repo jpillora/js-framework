@@ -48,6 +48,7 @@
       'lib/jquery.cookie': ['jquery'],
       'lib/jquery.color': ['jquery'],
       'lib/jquery.autogrow': ['jquery'],
+      'lib/jquery.timeago': ['jquery'],
       'lib/prettify': ['css!framework/css/prettify']
     }
   });

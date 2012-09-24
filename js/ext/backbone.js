@@ -165,12 +165,9 @@ define(['backbone','util/is'], function(Backbone,is) {
         collection.on('add', this.addOne, this);
 
       //bind parent model events
-      var event = 'change:'+attribute;
-      view.log('bind event: ' + event);
-
       model.on('change:'+attribute, function(model, obj) {
 
-        view.log('change: ' + attribute + " to: " + JSON.stringify(newItems) + " !!");
+        view.log('update: ' + attribute + " !");
 
         var newItems;
         if(is.array(obj)) {
@@ -187,14 +184,11 @@ define(['backbone','util/is'], function(Backbone,is) {
         collection.add(newItems, {merge:true});
       });
 
-
-      var items = model.get(attribute);
-
       //add when ready
-      if(items && items.length)
       view.on('rendered', function() {
-        view.log("model set: " + attribute + ": #" + items.length);
-        model.set(attribute, {items:items})
+        var items = model.get(attribute);
+        if(items && items.length)
+          model.set(attribute, {items:items});
       });
 
       return collection;
