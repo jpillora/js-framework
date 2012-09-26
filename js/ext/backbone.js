@@ -95,6 +95,27 @@ define(['backbone','util/is'], function(Backbone,is) {
 
     },
 
+    setupHidables: function() {
+
+      var view = this, hideWhens = this.$('[data-show-when]');
+
+      hideWhens.each(function() {
+        var elem = $(this),
+            selector = elem.attr('data-show-when'),
+            method = elem.attr('data-method') || 'val',
+            target = view.$(selector);
+
+        if(target.length == 0) return;
+
+        if(target.is('input,textarea'))
+        target.keyup(function() {
+          elem.visible(!!target[method]());
+        }).trigger('keyup');
+
+      });
+
+    },
+
     setupTogglers: function() {
 
       var view = this, togglers = view.$('[data-toggle]');
@@ -125,7 +146,6 @@ define(['backbone','util/is'], function(Backbone,is) {
     executeTemplate: function() {
       if(!this.template) return this.log("cannot exec. template. no template set.");
       var data = this.model === undefined ? {} : this.model.toJSON();
-      //this.log("data: " + JSON.stringify(data));
       this.$el.html(this.template(data));
     },
 
