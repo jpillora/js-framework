@@ -27,6 +27,12 @@ define(['jquery'], function() {
     return true;
   }
 
+  $.fn.visible = function(bool){
+    var hidden = $(this).parents(":hidden").length > 0;
+    return $(this)[hidden && bool ? 'show'      : hidden  && !bool ? 'hide' :
+                  !hidden && bool ? 'slideDown' : !hidden && !bool ? 'slideUp' : 'noop'](); 
+  };
+
   $.titlise = function(str) {
     var splitChar = str.indexOf(' ') > 0 ? ' ' : '_';
     var parts = str.split(splitChar);
@@ -41,9 +47,9 @@ define(['jquery'], function() {
     }, 100);
   }
 
-  $.fn.scrollTo = function(e) {
+  $.fn.scrollTo = function() {
     if(this && this.length > 0)
-      $.scrollTo(0 ? this.is(':hidden') : e.offset().top-100);
+      $.scrollTo(this.is(':hidden') ? 0 : this.offset().top-100);
   }
 
   return $;
