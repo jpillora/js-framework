@@ -8,7 +8,7 @@
         m = script.src.match(/^(\w+):\/\/([^\/]+)\//);
     if(m &&main && main.match(/framework$/)) {
       var protocol = m[1], host = m[2];
-      framework = 'http://'+host+'/' + (host === '127.0.0.1:8888' ?  'framework/' : '');
+      framework = 'http://'+host+'/' + (host.match(/8888$/) ?  'framework/' : '');
       break;
     }
   }

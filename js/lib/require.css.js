@@ -6,15 +6,9 @@ define({
       return;
     }
 
-    var extension = name.match(/\.(\w+)$/);
+    name += ".css";
 
-    if(extension && extension[1] !== 'css')
-      throw "Cannot load non-css files: "+ name;
-
-    if(!extension)
-      name += ".css";
-
-    var path = name.match(/^\w+/);
+    var path = name.match(/^\w+\b/);
 
     if(path && config.paths) {
       var p = config.paths[path];
