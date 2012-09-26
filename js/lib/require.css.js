@@ -11,10 +11,7 @@ define({
 
     var path = name.match(/^\w+/);
 
-    if(!path)
-      throw "Invalid path";
-
-    if(config.paths) {
+    if(path && config.paths) {
       var p = config.paths[path];
       if(p) name = name.replace(/^\w+/,p);
     }
