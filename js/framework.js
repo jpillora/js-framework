@@ -33,6 +33,8 @@
         'bootstrap'     : 'lib/bootstrap',
         'underscore'    : 'lib/lodash.min',
         'css'           : 'lib/require.css',
+        'cs'            : 'lib/require.cs',
+        'less'          : 'lib/require.less',
         'text'          : 'lib/require.text'
       }
     },
@@ -44,6 +46,7 @@
         exports: 'Backbone'
       },
       'lib/bootstrap': ['jquery'],
+      'lib/bootstrap.min': ['jquery'],
       //jquery plugins
       'lib/jquery.cookie': ['jquery'],
       'lib/jquery.color': ['jquery'],
