@@ -1,5 +1,11 @@
 define(['lib/jquery.cookie','lib/json2'], function() {
 
+  var log = function(s) {
+    if(console !== undefined)
+      console.log("store.js: " + s);
+    return null;
+  }
+
   if($.cookie === undefined) throw "Missing jquery.cookie.js";
   if(JSON === undefined) throw "Missing json2.js";
 
@@ -14,7 +20,7 @@ define(['lib/jquery.cookie','lib/json2'], function() {
     get: function(key) {
       var o = $.cookie(key);
       if(!o) return null;
-      if(typeOf(o) !== 'object') throw "Getting key from a non-object";
+      if(typeOf(o) !== 'object') return log("Getting key from a non-object");
       if(o && o[IS_SET] === true) {
         var vals = [];
         for (var val in o) if(val !== IS_SET) vals.push(val);
@@ -26,7 +32,7 @@ define(['lib/jquery.cookie','lib/json2'], function() {
       if(val === undefined)
         return $.cookie(key,keyval), keyval;
       var o = $.cookie(key) || {};
-      if(typeOf(o) !== 'object') throw "Setting key on a non-object";
+      if(typeOf(o) !== 'object') return log("Setting key on a non-object");
       if(!val) delete o[keyval];
       else o[keyval] = val;
       $.cookie(key, o);
@@ -34,7 +40,7 @@ define(['lib/jquery.cookie','lib/json2'], function() {
     },
     push : function(key,val) {
       var a = $.cookie(key) || [];
-      if(typeOf(a) !== 'array') throw "Pushing to a non-array";
+      if(typeOf(a) !== 'array') return log("Pushing to a non-array");
       a.push(val);
       $.cookie(key, a);
       return a;
@@ -42,7 +48,7 @@ define(['lib/jquery.cookie','lib/json2'], function() {
     pop: function(key) {
       var a = $.cookie(key);
       if(!a) return null;
-      if(typeOf(a) !== 'array') throw "Popping a non-array";
+      if(typeOf(a) !== 'array') return log("Popping a non-array");
       if(a.pop === undefined) return;
       var val = a.pop();
       $.cookie(key, a);
