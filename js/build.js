@@ -6,10 +6,6 @@
   //entry
   name: '../../framework/js/framework',
 
-  modules: [{
-    name: 'bootstrap'
-  }],
-
   //framework paths
   paths: {
     'framework': '../../framework/',
