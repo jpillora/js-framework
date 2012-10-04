@@ -1,4 +1,4 @@
-define(['require', './normalize'], function(req, normalize) {
+define(['require', './require.css.normalize'], function(req, normalize) {
   var baseUrl = req.toUrl('.');
   
   var cssAPI = {};

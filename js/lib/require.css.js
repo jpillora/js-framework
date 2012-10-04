@@ -24,7 +24,7 @@ define(['require', './require.css.normalize', 'text'], function(require, normali
   //main api object
   var cssAPI = {};
   
-  cssAPI.pluginBuilder = './css-builder';
+  cssAPI.pluginBuilder = './require.css-builder';
   
   //used to track all css injections
   cssAPI.defined = {};

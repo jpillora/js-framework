@@ -6,6 +6,10 @@
   //entry
   name: '../../framework/js/framework',
 
+  modules: [{
+    name: 'bootstrap'
+  }],
+
   //framework paths
   paths: {
     'framework': '../../framework/',
@@ -19,9 +23,11 @@
     '*': {
       'jquery'        : 'lib/jquery',
       'backbone'      : 'lib/backbone',
-      'bootstrap'     : 'lib/bootstrap',
+      'bootstrap'     : 'lib/bootstrap.min',
       'underscore'    : 'lib/lodash.min',
       'css'           : 'lib/require.css',
+      'cs'            : 'lib/require.cs',
+      'less'          : 'lib/require.less',
       'text'          : 'lib/require.text'
     }
   },
@@ -32,11 +38,12 @@
       deps: ['underscore', 'jquery'],
       exports: 'Backbone'
     },
-    'lib/bootstrap': ['jquery'],
+    'lib/bootstrap.min': ['css!framework/css/bootstrap-combined.min!', 'jquery'],
+    'lib/prettify': ['css!framework/css/prettify'],
     //jquery plugins
-    'lib/jquery.autogrow': ['jquery'],
     'lib/jquery.cookie': ['jquery'],
     'lib/jquery.color': ['jquery'],
-    'lib/prettify': ['css!framework/css/prettify']
+    'lib/jquery.autogrow': ['jquery'],
+    'lib/jquery.timeago': ['jquery']
   }
 })
