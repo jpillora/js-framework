@@ -23,7 +23,13 @@ define(['css', 'require'], function(css, require) {
         plugin.parse = function(less) {
           var css;
           parser.parse(less, function(err, tree) {
-            if (err) throw err;
+            if (err) {
+              throw "LESS Compliler Error: " + err.type + 
+                            " (Line: " + err.line + ", " +
+                            "Column: " + err.column + ")\n" +
+                            "Extact: \n" + err.extract.join('\n') + "\n\n" +
+                            "File: " + lessId;
+            }
             css = tree.toCSS();
           });
           //instant callback luckily
