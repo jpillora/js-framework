@@ -1,31 +1,44 @@
-// http://stackoverflow.com/questions/5889901/requirejs-and-less
-define({
-  version: '0.1',
-  load: function(name, req, onLoad, config) {
-    req(['text!' + name + '.less', 'lib/less'], function(lessText) {
-      var styleElem;
-      var parser = new(less.Parser)({
-        filename: name,
-        paths: [name.split('/').slice(0,-1).join('/') + '/'],
-      });
-      parser.parse(lessText, function (err, css) {
-        if (err) {
-          if (typeof console !== 'undefined' && console.error) {
-            console.error(err);
-          }
-        } else {
-          styleElem = document.createElement('style');
-          styleElem.type = 'text/css';
+define(['css', 'require'], function(css, require) {
 
-          if (styleElem.styleSheet)
-            styleElem.styleSheet.cssText = css.toCSS();
-          else
-            styleElem.appendChild( document.createTextNode( css.toCSS() ) );
+  var plugin = {};
 
-          document.getElementsByTagName("head")[0].appendChild( styleElem );
+  plugin.pluginBuilder = './require.less-builder';
+
+  //copy api methods from the css plugin
+  plugin.normalize = css.normalize;
+
+  plugin.load = function(lessId, req, load, config) {
+    var skipLoad = false;
+    if (lessId.substr(lessId.length - 1, 1) == '!') {
+      lessId = lessId.substr(0, lessId.length - 1);
+      skipLoad = true;
+    }
+
+    if (lessId.substr(lessId.length - 5, 5) != '.less') lessId += '.less';
+
+    //separately load the parser to avoid building it in
+    if (plugin.parse == undefined && !css.defined[lessId]) {
+      require(['./less'], function() {
+        var parser = new less.Parser();
+        plugin.parse = function(less) {
+          var css;
+          parser.parse(less, function(err, tree) {
+            if (err) throw err;
+            css = tree.toCSS();
+          });
+          //instant callback luckily
+          return css;
         }
-        onLoad(styleElem);
+        plugin.load(lessId, req, load, config);
       });
-    });
+      return false;
+    }
+
+    css.load(lessId, req, skipLoad ?
+    function() {} : load, config, plugin.parse);
+
+    if (skipLoad) load();
   }
+
+  return plugin;
 });
