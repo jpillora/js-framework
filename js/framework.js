@@ -52,7 +52,10 @@
       'lib/jquery.color': ['jquery'],
       'lib/jquery.autogrow': ['jquery'],
       'lib/jquery.timeago': ['jquery']
-    }
+    },
+
+    //options
+    waitSeconds: 10
   });
 
   //Setup library customisations and Initialise the App
