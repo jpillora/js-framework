@@ -145,8 +145,15 @@ define(['backbone','util/is'], function(Backbone,is) {
 
     executeTemplate: function() {
       if(!this.template) return this.log("cannot exec. template. no template set.");
-      var data = this.model === undefined ? {} : this.model.toJSON();
-      this.$el.html(this.template(data));
+      var data = this.model === undefined ? {} : 
+                 this.model instanceof Backbone.Model ? this.model.toJSON() : 
+                 this.model;
+      try {
+        this.$el.html(this.template(data));
+      } catch(e) {
+        this.log("Template Error with data: " + JSON.stringify(data));
+        throw e;
+      }
     },
 
     parentModel: function(attribute) {
