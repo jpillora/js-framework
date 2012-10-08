@@ -8,23 +8,21 @@ define(['backbone','util/is'], function(Backbone,is) {
   var getName = function(obj) {
     return obj.name + ": " + (obj.model && obj.model.id ? (obj.model.id + ": ") : 
                                            obj.cid ? (obj.cid + ": ") : '');
-  }
-
-  var logFn = function(str, groupBoolean) {
-
-    if(str)
-      str = getName(this) + str;
-
-    if(groupBoolean === true)
-      console.group(str);
-
-    if(str && groupBoolean !== true)
-      console.log(str);
-
-    if(groupBoolean === false)
-      console.groupEnd();
   };
 
+  var logFn = function() {
+    var num = arguments.length;
+    var grp = is.boolean(arguments[num-1]) ? 
+                arguments[num-1] : null;
+    
+    arguments[0] = getName(this) + arguments[0];
+    
+    if(grp === true) console.group(arguments[0]);
+    if(arguments[0] && grp === null) 
+      console.log.apply(console, arguments);
+    if(grp === false) console.groupEnd();
+  };
+  
   //extra model methods
   _.extend(Backbone.Model.prototype, {
     log: logFn

@@ -1,7 +1,7 @@
 //boolean helpers
 define(function() {
 
-  var types = ['Array','Function','Object','String','Number'],
+  var types = ['Array','Function','Object','String','Number','Boolean'],
       typesLength = types.length,
       functions = {};
 
