@@ -2,10 +2,12 @@
 (function(){
 
   //auto set framework path based on framework script tag
-  var framework = '', scripts = document.getElementsByTagName("script");
+  var framework = '', realMain = null, scripts = document.getElementsByTagName("script");
   for(var i = 0; i < scripts.length; ++i) {
-    var script = scripts[i], main = script.getAttribute('data-main'),
+    var script = scripts[i], 
+        main = script.getAttribute('data-main'),
         m = script.src.match(/^(\w+):\/\/([^\/]+)\//);
+    realMain = script.getAttribute('data-real-main');
     if(m &&main && main.match(/framework$/)) {
       var protocol = m[1], host = m[2];
       framework = 'http://'+host+'/' + (host.match(/8888$/) ?  'framework/' : '');
@@ -59,6 +61,6 @@
   });
 
   //Setup library customisations and Initialise the App
-  require(['main']);
+  require([realMain || 'main']);
 
 })();
