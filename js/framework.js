@@ -21,10 +21,9 @@
     
     //framework paths
     paths: {
-      'framework': framework,
-      'lib'      : framework + 'js/lib',
-      'ext'      : framework + 'js/ext',
-      'util'     : framework + 'js/util'
+      'lib'      : 'framework/js/lib',
+      'ext'      : 'framework/js/ext',
+      'util'     : 'framework/js/util'
     },
 
     //shortcuts
@@ -34,9 +33,9 @@
         'backbone'      : 'lib/backbone',
         'bootstrap'     : 'lib/bootstrap.min',
         'underscore'    : 'lib/lodash.min',
-        'css'           : 'lib/require.css',
+        'css'           : 'lib/require/css',
         'cs'            : 'lib/require.cs',
-        'less'          : 'lib/require.less',
+        'less'          : 'lib/require/less',
         'text'          : 'lib/require.text'
       }
     },
@@ -61,6 +60,6 @@
   });
 
   //Setup library customisations and Initialise the App
-  require([realMain || 'main']);
+  require(['main']);
 
 })();
