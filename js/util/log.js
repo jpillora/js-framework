@@ -1,8 +1,8 @@
 define([], function() {
 
-  return function(str) {
+  return function() {
     if(window.console !== undefined)
-      console.log(str);
+      console.log(arguments);
   }
   
 });

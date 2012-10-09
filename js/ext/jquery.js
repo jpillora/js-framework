@@ -34,7 +34,8 @@ define(['jquery'], function() {
   };
 
   $.titlise = function(str) {
-    var splitChar = str.indexOf(' ') > 0 ? ' ' : '_';
+    var splitChar = str.indexOf(' ') > 0 ? ' ' :
+                    str.indexOf('-') > 0 ? '-' : '_';
     var parts = str.split(splitChar);
     for(var p = 0; p < parts.length; ++p)
       parts[p] = parts[p].charAt(0).toUpperCase() + parts[p].substr(1).toLowerCase();
