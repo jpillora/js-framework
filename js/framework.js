@@ -21,9 +21,10 @@
     
     //framework paths
     paths: {
-      'lib'      : 'framework/js/lib',
-      'ext'      : 'framework/js/ext',
-      'util'     : 'framework/js/util'
+      'framework': framework,
+      'lib'      : framework + 'js/lib',
+      'ext'      : framework + 'js/ext',
+      'util'     : framework + 'js/util'
     },
 
     //shortcuts
