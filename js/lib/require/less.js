@@ -13,9 +13,13 @@ define(['css', 'require', './lessc'], function(css, require, lessc) {
     var css;
     parser.parse(less, function(err, tree) {
       if (err) {
-        console.error(err);
-        throw err;
+        throw "LESS Compliler Error: " + err.type + "\n" +
+                      "Line: " + err.line + ", " +
+                      "Column: " + err.column + "\n" +
+                      "Extact: \n" + err.extract.join('\n') + "\n\n" +
+                      "File: " + err.lessId;
       }
+
       css = tree.toCSS();
     });
     //instant callback luckily

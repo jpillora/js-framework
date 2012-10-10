@@ -6,8 +6,9 @@ define(['backbone','util/is'], function(Backbone,is) {
   
 
   var getName = function(obj) {
-    return obj.name + ": " + (obj.model && obj.model.id ? (obj.model.id + ": ") : 
-                                           obj.cid ? (obj.cid + ": ") : '');
+    return obj.name + ": " + (                         obj.id ? (obj.id + ": ") :
+                              obj.model && obj.model.id ? (obj.model.id + ": ") : 
+                                                     obj.cid ? (obj.cid + ": ") : '');
   };
 
   var logFn = function() {
