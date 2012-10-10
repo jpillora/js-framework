@@ -12,8 +12,10 @@ define(['css', 'require', './lessc'], function(css, require, lessc) {
   less.parse = function(less) {
     var css;
     parser.parse(less, function(err, tree) {
-      if (err)
+      if (err) {
+        console.error(err);
         throw err;
+      }
       css = tree.toCSS();
     });
     //instant callback luckily

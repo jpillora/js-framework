@@ -1,4 +1,4 @@
-define(['require-css/css-builder', './lessc'], function(css, lessc) {
+define(['./css-builder', './lessc'], function(css, lessc) {
   var less = {};
   
   var parser = new lessc.Parser();
