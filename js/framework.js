@@ -31,7 +31,7 @@
     map: {
       '*': {
         'jquery'        : 'lib/jquery',
-        'backbone'      : 'lib/backbone',
+        'backbone'      : 'ext/backbone',
         'bootstrap'     : 'lib/bootstrap.min',
         'underscore'    : 'lib/lodash.min',
         'css'           : 'lib/require/css',

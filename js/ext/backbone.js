@@ -1,8 +1,8 @@
-define(['backbone','util/is'], function(Backbone,is) {
+define(['lib/backbone','util/is'], function(Backbone,is) {
 
   //throw away logs on older browsers
-  if(window.console === undefined)
-      window.console = { log: $.noop, group: $.noop };
+  if(window.console === undefined || $.browser.msie)
+      window.console = { log: $.noop, group: $.noop, groupEnd: $.noop };
   
 
   var getName = function(obj) {
