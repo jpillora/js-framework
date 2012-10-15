@@ -184,6 +184,9 @@ define(['lib/backbone','util/is'], function(Backbone,is) {
       model.set(attribute+'_collection', collection);
 
       //bind collection events
+      if(is.fn(this.change))
+        collection.on('add remove reset', this.change, this);
+
       if(is.fn(this.addAll))
         collection.on('reset', this.addAll, this);
 

@@ -48,7 +48,6 @@
         exports: 'Backbone'
       },
       'lib/bootstrap.min': ['css!framework/css/bootstrap-combined.min', 'jquery'],
-      'lib/prettify': ['css!framework/css/prettify'],
       //jquery plugins
       'lib/jquery.cookie': ['jquery'],
       'lib/jquery.color': ['jquery'],
