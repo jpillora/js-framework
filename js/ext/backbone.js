@@ -1,13 +1,14 @@
-define(['backbone','util/is'], function(Backbone,is) {
+define(['lib/backbone','util/is'], function(Backbone,is) {
 
   //throw away logs on older browsers
-  if(window.console === undefined)
-      window.console = { log: $.noop, group: $.noop };
+  if(window.console === undefined || $.browser.msie)
+      window.console = { log: $.noop, group: $.noop, groupEnd: $.noop };
   
 
   var getName = function(obj) {
-    return obj.name + ": " + (obj.model && obj.model.id ? (obj.model.id + ": ") : 
-                                           obj.cid ? (obj.cid + ": ") : '');
+    return obj.name + ": " + (                         obj.id ? (obj.id + ": ") :
+                              obj.model && obj.model.id ? (obj.model.id + ": ") : 
+                                                     obj.cid ? (obj.cid + ": ") : '');
   };
 
   var logFn = function() {
@@ -183,6 +184,9 @@ define(['backbone','util/is'], function(Backbone,is) {
       model.set(attribute+'_collection', collection);
 
       //bind collection events
+      if(is.fn(this.change))
+        collection.on('add remove reset', this.change, this);
+
       if(is.fn(this.addAll))
         collection.on('reset', this.addAll, this);
 

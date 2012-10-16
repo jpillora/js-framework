@@ -1,0 +1,49 @@
+define(['css', 'require', './lessc'], function(css, require, lessc) {
+  
+  if (typeof window == 'undefined')
+    return { load: function(n, r, load){ load() } };
+  
+  var less = {};
+  
+  less.pluginBuilder = './less-builder';
+  
+  var parser = new lessc.Parser();
+  
+  less.parse = function(less) {
+    var css;
+    parser.parse(less, function(err, tree) {
+      if (err) {
+        throw "LESS Compliler Error: " + err.type + "\n" +
+                      "Line: " + err.line + ", " +
+                      "Column: " + err.column + "\n" +
+                      "Extact: \n" + err.extract.join('\n') + "\n\n" +
+                      "File: " + err.lessId;
+      }
+
+      css = tree.toCSS();
+    });
+    //instant callback luckily
+    return css;
+  }
+  
+  //copy api methods from the css plugin
+  less.normalize = css.normalize;
+  
+  less.load = function(lessId, req, load, config) {
+    var skipLoad = false;
+    if (lessId.substr(lessId.length - 1, 1) == '!') {
+      lessId = lessId.substr(0, lessId.length - 1);
+      skipLoad = true;
+    }
+    
+    if (lessId.substr(lessId.length - 5, 5) != '.less')
+      lessId += '.less';
+    
+    css.load(lessId, req, skipLoad ? function(){} : load, config, less.parse);
+    
+    if (skipLoad)
+      load();
+  }
+  
+  return less;
+});

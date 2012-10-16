@@ -79,7 +79,7 @@ var prettyPrintOne;
 var prettyPrint;
 
 
-(function () {
+define(['css!framework/css/prettify'],function () {
   var win = window;
   // Keyword lists for various languages.
   // We use things that coerce to strings to make them compact when minified
@@ -1572,4 +1572,6 @@ var REGEXP_PRECEDER_PATTERN = '(?:^^\\.?|[+-]|[!=]=?=?|\\#|%=?|&&?=?|\\(|\\*=?|[
       return PR; 
     });
   }
-})();
+
+  return PR;
+});

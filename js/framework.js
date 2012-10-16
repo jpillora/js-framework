@@ -31,12 +31,12 @@
     map: {
       '*': {
         'jquery'        : 'lib/jquery',
-        'backbone'      : 'lib/backbone',
+        'backbone'      : 'ext/backbone',
         'bootstrap'     : 'lib/bootstrap.min',
         'underscore'    : 'lib/lodash.min',
-        'css'           : 'lib/require.css',
+        'css'           : 'lib/require/css',
         'cs'            : 'lib/require.cs',
-        'less'          : 'lib/require.less',
+        'less'          : 'lib/require/less',
         'text'          : 'lib/require.text'
       }
     },
@@ -48,7 +48,6 @@
         exports: 'Backbone'
       },
       'lib/bootstrap.min': ['css!framework/css/bootstrap-combined.min', 'jquery'],
-      'lib/prettify': ['css!framework/css/prettify'],
       //jquery plugins
       'lib/jquery.cookie': ['jquery'],
       'lib/jquery.color': ['jquery'],
@@ -61,6 +60,6 @@
   });
 
   //Setup library customisations and Initialise the App
-  require([realMain || 'main']);
+  require(['main']);
 
 })();
