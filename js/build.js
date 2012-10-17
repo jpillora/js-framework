@@ -7,10 +7,12 @@
   // name: 'lib/require/almond',
   // include: ['../../framework/js/framework'],
   // insertRequire: ['../../framework/js/framework'],
+
   separateCSS: false,
   preserveLicenseComments: false,
   wrap: true,
   optimize: 'uglify',
+  
   //framework paths
   paths: {
     'framework': '../../framework/',

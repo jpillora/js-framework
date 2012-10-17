@@ -1,29 +1,12 @@
-define(['css', 'require', './lessc'], function(css, require, lessc) {
-  
-  if (typeof window == 'undefined')
-    return { load: function(n, r, load){ load() } };
+define(['css', 'require'], function(css, require) {
   
   var less = {};
   
   less.pluginBuilder = './less-builder';
   
-  var parser = new lessc.Parser();
-  
-  less.parse = function(less) {
-    var css;
-    parser.parse(less, function(err, tree) {
-      if (err) {
-        throw "LESS Compliler Error: " + err.type + "\n" +
-                      "Line: " + err.line + ", " +
-                      "Column: " + err.column + "\n" +
-                      "Extact: \n" + err.extract.join('\n') + "\n\n" +
-                      "File: " + err.lessId;
-      }
-
-      css = tree.toCSS();
-    });
-    //instant callback luckily
-    return css;
+  if (typeof window == 'undefined') {
+    less.load = function(n, r, load) { load(); }
+    return less;
   }
   
   //copy api methods from the css plugin
@@ -39,7 +22,24 @@ define(['css', 'require', './lessc'], function(css, require, lessc) {
     if (lessId.substr(lessId.length - 5, 5) != '.less')
       lessId += '.less';
     
-    css.load(lessId, req, skipLoad ? function(){} : load, config, less.parse);
+    if (!less.parse) {
+      require(['./lessc'], function(lessc) {
+        var parser = new lessc.Parser();
+        less.parse = function(less) {
+          var css;
+          parser.parse(less, function(err, tree) {
+            if (err)
+              throw err;
+            css = tree.toCSS();
+          });
+          //instant callback luckily
+          return css;
+        }
+        css.load(lessId, req, skipLoad ? function(){} : load, config, less.parse);
+      });
+    }
+    else
+      css.load(lessId, req, skipLoad ? function(){} : load, config, less.parse);
     
     if (skipLoad)
       load();
