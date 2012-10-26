@@ -1,7 +1,5 @@
-define(['lib/ace/ace'], function(ace) {
+define(['lib/ace/ace'], function() {
 
-  return {
-    ace: ace
-  }
+  return {}
 
 });
