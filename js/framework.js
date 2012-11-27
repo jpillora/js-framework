@@ -39,7 +39,7 @@
         'css'           : 'lib/require/css',
         'cs'            : 'lib/require.cs',
         'less'          : 'lib/require/less',
-        'txt'           : 'lib/require.text',
+        'text'          : 'lib/require.text',
         'jquery'        : 'lib/jquery',
         'ace'           : 'lib/require/is!local?lib/ace/ace:http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js'
       }
