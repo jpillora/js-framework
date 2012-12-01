@@ -73,6 +73,6 @@
   });
 
   //Setup library customisations and Initialise the App
-  require(['main']);
+  require([realMain || 'main']);
 
 })();
