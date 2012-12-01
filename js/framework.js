@@ -34,6 +34,9 @@
         'backbone'      : 'ext/backbone',
         'lib/backbone'  : 'lib/backbone',
         'bootstrap'     : 'lib/bootstrap.min',
+        'bootstrap.js'  : 'framework/js/lib/bootstrap.min',
+        'bootstrap-combined.css' : 'lib/require/css!framework/css/bootstrap-combined.min',
+        'bootstrap.css'          : 'lib/require/css!framework/css/bootstrap.min',
         'underscore'    : 'lib/lodash.min',
         'is'            : 'lib/require/is',
         'css'           : 'lib/require/css',
@@ -51,7 +54,7 @@
         deps: ['underscore', 'jquery'],
         exports: 'Backbone'
       },
-
+      'framework/js/lib/bootstrap.min': ['jquery'],
       'lib/bootstrap.min': ['css!framework/css/bootstrap-combined.min', 'jquery'],
       //jquery plugins
       'lib/jquery.cookie': ['jquery'],
