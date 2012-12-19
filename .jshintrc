@@ -1,7 +1,6 @@
 {
   "globals": {
-    "define": false, 
-    "gapi": false
+    "define": false
   },
   "jquery" : true,
   "browser" : true

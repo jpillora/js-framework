@@ -56,6 +56,7 @@
       },
       'framework/js/lib/bootstrap.min': ['jquery'],
       'lib/bootstrap.min': ['css!framework/css/bootstrap-combined.min', 'jquery'],
+      "lib/bootstrap-datepicker": ["jquery"],
       //jquery plugins
       'lib/jquery.cookie': ['jquery'],
       'lib/jquery.color': ['jquery'],
