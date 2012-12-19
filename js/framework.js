@@ -43,7 +43,7 @@
         'cs'            : 'lib/require.cs',
         'less'          : 'lib/require/less',
         'text'          : 'lib/require.text',
-        'jquery'        : 'lib/jquery',
+        'jquery'        : 'lib/require/is!jQuery?lib/jquery',
         'ace'           : 'lib/require/is!local?lib/ace/ace:http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js'
       }
     },
@@ -70,7 +70,8 @@
     //extra config
     config: {
       'lib/require/is': {
-        local: !!window.location.host.match(/^localhost/)
+        local: !!window.location.host.match(/^localhost/),
+        jQuery: !window.jQuery.isReady
       }
     }
 

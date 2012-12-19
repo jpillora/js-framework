@@ -3,7 +3,7 @@ define(['jquery'], function() {
   //extra jquery methods
   $.fn.flash = function(color) {
     var tmp = $(this).css('background-color');
-    $(this)
+    return $(this)
       .animate({'background-color':color}, '100')
       .animate({'background-color':tmp}, '50');
   };
@@ -51,10 +51,11 @@ define(['jquery'], function() {
   $.fn.scrollTo = function() {
     if(this && this.length > 0)
       $.scrollTo(this.is(':hidden') ? 0 : this.offset().top-100);
+    return $(this);
   };
 
   $.fn.disabled = function(bool) {
-    $(this).attr('disabled', bool ? 'disabled' : null);
+    return $(this).attr('disabled', bool ? 'disabled' : null);
   };
 
   return $;
