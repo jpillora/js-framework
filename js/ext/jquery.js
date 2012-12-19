@@ -12,11 +12,11 @@ define(['jquery'], function() {
     return this.filter(function(i,e) {
       return $(e).nameContains(name); 
     });
-  }
+  };
 
   $.fn.nameContains = function(name) {
     return this.attr("name") && this.attr("name").match("[^\\w]"+name+"[^\\w]"); 
-  }
+  };
 
   $.fn.equals = function(that) {
     if($(this).length !== that.length)
@@ -25,7 +25,7 @@ define(['jquery'], function() {
       if($(this)[i] !== that[i])
         return false;
     return true;
-  }
+  };
 
   $.fn.visible = function(bool){
     var hidden = $(this).parents(":hidden").length > 0;
@@ -40,18 +40,22 @@ define(['jquery'], function() {
     for(var p = 0; p < parts.length; ++p)
       parts[p] = parts[p].charAt(0).toUpperCase() + parts[p].substr(1).toLowerCase();
     return parts.join(' ');
-  }
+  };
 
   $.scrollTo = function(y) {
     $('html, body').animate({
       scrollTop: y
     }, 100);
-  }
+  };
 
   $.fn.scrollTo = function() {
     if(this && this.length > 0)
       $.scrollTo(this.is(':hidden') ? 0 : this.offset().top-100);
-  }
+  };
+
+  $.fn.disabled = function(bool) {
+    $(this).attr('disabled', bool ? 'disabled' : null);
+  };
 
   return $;
 

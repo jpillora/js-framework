@@ -1,0 +1,8 @@
+{
+  "globals": {
+    "define": false, 
+    "gapi": false
+  },
+  "jquery" : true,
+  "browser" : true
+}
