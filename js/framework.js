@@ -62,7 +62,7 @@
       'lib/jquery.color': ['jquery'],
       'lib/jquery.autogrow': ['jquery'],
       'lib/jquery.timeago': ['jquery'],
-      '//raw.github.com/jpillora/jquery.prompt/master/dist/jquery.prompt.min.js': ['jquery']
+      '//raw.github.com/jpillora/jquery.prompt/gh-pages/dist/jquery.prompt.js': ['jquery']
     },
 
     //options
