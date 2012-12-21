@@ -2,7 +2,7 @@
 (function(){
 
   //auto set framework path based on framework script tag
-  var framework = '', realMain = null, scripts = document.getElementsByTagName("script");
+  var framework = '', realMain = null, scripts = document.getElementsByTagName('script');
   for(var i = 0; i < scripts.length; ++i) {
     var script = scripts[i], 
         main = script.getAttribute('data-main'),
@@ -56,7 +56,7 @@
       },
       'framework/js/lib/bootstrap.min': ['jquery'],
       'lib/bootstrap.min': ['css!framework/css/bootstrap-combined.min', 'jquery'],
-      "lib/bootstrap-datepicker": ["jquery"],
+      'lib/bootstrap-datepicker': ['css!framework/css/bootstrap-datepicker', 'jquery', 'bootstrap'],
       //jquery plugins
       'lib/jquery.cookie': ['jquery'],
       'lib/jquery.color': ['jquery'],
@@ -71,7 +71,7 @@
     config: {
       'lib/require/is': {
         local: !!window.location.host.match(/^localhost/),
-        jQuery: !window.jQuery.isReady
+        jQuery: !window.jQuery || !window.jQuery.isReady
       }
     }
 

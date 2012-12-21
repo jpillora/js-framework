@@ -58,6 +58,51 @@ define(['jquery'], function() {
     return $(this).attr('disabled', bool ? 'disabled' : null);
   };
 
+  $.fn.rotate = function(deg) {
+
+    var key = $.browser.webkit  ? 'WebkitTransform' :
+              $.browser.mozilla ? '-moz-transform'  : null;
+
+    if(key) $(this).css(key, deg ? ('rotate(' + deg + 'deg)') : '' );
+  };
+
+  $.fn.wiggle = (function(){
+
+    var step = 10, angle = 10;
+
+    return function(duration) {
+
+      if(!duration) duration = 300;
+
+      var elem = $(this),
+          total = 0,
+          rotation = 0,
+          dir = 1,
+          ticker = setInterval(tick, step);
+
+      function tick() {
+
+        if(total >= duration) {
+          elem.rotate(0);
+          clearInterval(ticker);
+          return;
+        }
+
+        elem.rotate(rotation);
+
+        rotation += (dir * (angle/5));
+
+        if(rotation === angle)
+          dir = -1;
+        else if(rotation === (angle*-1))
+          dir = 1;
+
+        total += step;
+      }
+    };
+
+  }());
+
   return $;
 
 });
