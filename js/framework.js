@@ -10,7 +10,10 @@
     realMain = script.getAttribute('data-real-main');
     if(m &&main && main.match(/framework$/)) {
       var protocol = m[1], host = m[2];
-      framework = 'http://'+host+'/' + (host.match(/8888$/) ?  'framework/' : '');
+      if(host.match(/8888$/))
+        framework = 'http://localhost:8888/framework/';
+      else
+        framework = '//raw.github.com/jpillora/js-framework/gh-pages/';
       break;
     }
   }
