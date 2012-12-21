@@ -61,7 +61,8 @@
       'lib/jquery.cookie': ['jquery'],
       'lib/jquery.color': ['jquery'],
       'lib/jquery.autogrow': ['jquery'],
-      'lib/jquery.timeago': ['jquery']
+      'lib/jquery.timeago': ['jquery'],
+      '//raw.github.com/jpillora/jquery.prompt/master/dist/jquery.prompt.min.js': ['jquery']
     },
 
     //options
