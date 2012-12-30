@@ -12,8 +12,10 @@
       var protocol = m[1], host = m[2];
       if(host.match(/8888$/))
         framework = 'http://localhost:8888/framework/';
+      else if(protocol === 'https')
+        framework = 'https://raw.github.com/jpillora/js-framework/gh-pages/';
       else
-        framework = '//raw.github.com/jpillora/js-framework/gh-pages/';
+        framework = 'http://framework.jpillora.com/';
       break;
     }
   }
