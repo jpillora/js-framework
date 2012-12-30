@@ -17,6 +17,8 @@ define(['https://ssl.google-analytics.com/ga.js'], function() {
     _gaq.push(e);
   }
 
+  setup();
+
   return {
     event: event
   }

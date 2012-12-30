@@ -69,7 +69,7 @@
     },
 
     //options
-    waitSeconds: 10,
+    //waitSeconds: 10, set in library
 
     //extra config
     config: {
@@ -81,7 +81,12 @@
 
   });
 
+  var initModules = [];
+  initModules.push(realMain || 'main');
+  if(window.location.host.match(/jpillora/))
+    initModules.push('util/ga');
+
   //Setup library customisations and Initialise the App
-  require([realMain || 'main']);
+  require(initModules);
 
 })();
