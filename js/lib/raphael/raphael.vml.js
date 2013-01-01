@@ -7,8 +7,7 @@
 // │ Copyright (c) 2008-2011 Sencha Labs (http://sencha.com)             │ \\
 // │ Licensed under the MIT (http://raphaeljs.com/license.html) license. │ \\
 // └─────────────────────────────────────────────────────────────────────┘ \\
-define(['./raphael.core'], function (R) {  
-    if (!R.vml) return;
+window.Raphael.vml && function (R) {
     var has = "hasOwnProperty",
         Str = String,
         toFloat = parseFloat,
@@ -583,11 +582,11 @@ define(['./raphael.core'], function (R) {
         };
     };
     elproto.remove = function () {
-        if (this.removed || !this.node.parentNode) {
+        if (this.removed) {
             return;
         }
         this.paper.__set__ && this.paper.__set__.exclude(this);
-        R.eve.unbind("raphael.*.*." + this.id);
+        R.eve.unbind("*.*." + this.id);
         R._tear(this, this.paper);
         this.node.parentNode.removeChild(this.node);
         this.shape && this.shape.parentNode.removeChild(this.shape);
@@ -641,7 +640,7 @@ define(['./raphael.core'], function (R) {
         }
         value == null && R.is(name, "object") && (params = name);
         for (var key in params) {
-            eve("raphael.attr." + key + "." + this.id, this, params[key]);
+            eve("attr." + key + "." + this.id, this, params[key]);
         }
         if (params) {
             for (key in this.paper.customAttributes) if (this.paper.customAttributes[has](key) && params[has](key) && R.is(this.paper.customAttributes[key], "function")) {
@@ -858,7 +857,7 @@ define(['./raphael.core'], function (R) {
         return this;
     };
     R._engine.setViewBox = function (x, y, w, h, fit) {
-        R.eve("raphael.setViewBox", this, this._viewBox, [x, y, w, h, fit]);
+        R.eve("setViewBox", this, this._viewBox, [x, y, w, h, fit]);
         var width = this.width,
             height = this.height,
             size = 1 / mmax(w / width, h / height),
@@ -940,11 +939,12 @@ define(['./raphael.core'], function (R) {
                 container.appendChild(c);
             }
         }
+        // plugins.call(res, res, R.fn);
         res.renderfix = function () {};
         return res;
     };
     R.prototype.clear = function () {
-        R.eve("raphael.clear", this);
+        R.eve("clear", this);
         this.canvas.innerHTML = E;
         this.span = R._g.doc.createElement("span");
         this.span.style.cssText = "position:absolute;left:-9999em;top:-9999em;padding:0;margin:0;line-height:1;display:inline;";
@@ -952,7 +952,7 @@ define(['./raphael.core'], function (R) {
         this.bottom = this.top = null;
     };
     R.prototype.remove = function () {
-        R.eve("raphael.remove", this);
+        R.eve("remove", this);
         this.canvas.parentNode.removeChild(this.canvas);
         for (var i in this) {
             this[i] = typeof this[i] == "function" ? R._removedFactory(i) : null;
@@ -971,5 +971,4 @@ define(['./raphael.core'], function (R) {
             };
         })(method);
     }
-    return R;
-});
+}(window.Raphael);

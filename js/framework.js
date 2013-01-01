@@ -48,6 +48,7 @@
         'cs'            : 'lib/require.cs',
         'less'          : 'lib/require/less',
         'text'          : 'lib/require.text',
+        'raphael'       : 'lib/raphael/raphael',
         'jquery'        : 'lib/require/is!jQuery?lib/jquery',
         'ace'           : 'lib/require/is!local?lib/ace/ace:http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js'
       }
@@ -67,7 +68,8 @@
       'lib/jquery.color': ['jquery'],
       'lib/jquery.autogrow': ['jquery'],
       'lib/jquery.timeago': ['jquery'],
-      '//raw.github.com/jpillora/jquery.prompt/gh-pages/dist/jquery.prompt.js': ['jquery']
+      '//raw.github.com/jpillora/jquery.prompt/gh-pages/dist/jquery.prompt.js': ['jquery'],
+      'lib/raphael/raphael': ['lib/eve']
     },
 
     //options
