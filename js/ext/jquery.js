@@ -66,11 +66,11 @@ define(['jquery'], function() {
     if(key) $(this).css(key, deg ? ('rotate(' + deg + 'deg)') : '' );
   };
 
-  $.fn.wiggle = (function(){
+  (function(){
 
     var step = 10, angle = 10;
 
-    return function(duration) {
+    $.fn.wiggle = function(duration) {
 
       if(!duration) duration = 300;
 
@@ -92,9 +92,9 @@ define(['jquery'], function() {
 
         rotation += (dir * (angle/5));
 
-        if(rotation === angle)
+        if(rotation >= angle)
           dir = -1;
-        else if(rotation === (angle*-1))
+        else if(rotation <= (angle*-1))
           dir = 1;
 
         total += step;
